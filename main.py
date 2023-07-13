@@ -15,6 +15,11 @@ def home():
 def about():
     return render_template('about.html')
 
+@app.route('/huespedes')
+def about():
+    return render_template('huespedes.html')
+
+
 @app.route('/personas')
 def personas():
     return render_template('personas.html', personas=personaList)
