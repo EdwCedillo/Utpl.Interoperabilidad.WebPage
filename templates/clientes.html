@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+  <h4 class="my-6">Listado de clientes</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Ruc_ced</th>
+        <th scope="col">Rason_social</th>
+        <th scope="col">Cupo</th>
+        <th scope="col">Nombre_comercial</th>
+        <th scope="col">Tipo_cliente</th>
+      </tr>
+    </thead>
+    <tbody>     
+      <tr>
+          <td><a href="/clientes/delete/{{ clientes.id }}">{{ cliente.ruc_ced }}</a></td>
+          <td>{{ cliente.rason_social }}</td>
+          <td>{{ cliente.nombre_comercial}}</td>
+          <td>{{ cliente.cupo }}</td>
+          <td>{{ cliente.tipo_cliente }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h4 class="my-4">Agregar una nuevo cliente</h4>
+  <form action="/clientes" method="post">
+    <div class="mb-3">
+      <label for="rason_social" class="form-label">Rason_social</label>
+      <input type="text" class="form-control" id="rason_social" name="rason_social" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="nombre_comercial" class="form-label">Nombre_comercial</label>
+      <input type="text" class="form-control" id="nombre_comercial" name="nombre_comercial" required>
+    </div>
+    <div class="mb-3">
+      <label for="ruc_ced" class="form-label">Ruc_ced</label</label>
+      <input type="text" class="form-control" id="ruc_ced" name="ruc_ced" required>
+    </div>
+    <div class="mb-3">
+      <label for="cupo" class="form-label">cupo</label>
+      <input type="number" class="form-control" id="cupo" name="cupo" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Agregar</button>
+  </form>
+{% endblock %}

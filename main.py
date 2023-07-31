@@ -45,6 +45,39 @@ def add():
 
     return redirect(url_for('personas'))
 
+#clientes
+@app.route('/clientes')
+def clientes():
+    headers = {'apikey': API_KEY}
+    response = requests.get('https://utplwso2.tk/api-Cliente/1.0/clientes', headers=headers)
+    print(response)
+    return render_template('clientes.html', personas=response.json())
+
+@app.route('/personas/delete/<idcliente>')
+def delete_personas(idcliente):
+    headers = {'apikey': API_KEY}
+    response = requests.delete('https://utplwso2.tk/api-Cliente/1.0/clientes/'+idcliente, headers=headers)
+    print(response)
+    return redirect(url_for('clientes'))
+
+
+@app.route('/clientes', methods=['POST'])
+def add():
+    print("llego por aqui a guardar")
+    rason_social = request.form.get('rason_social')
+    ruc_ced = request.form.get('ruc_ced')
+    cupo = int(request.form.get('cupo'))
+    nombre_comercial = request.form.get('nombre_comercial')
+
+
+    person_data = {"rason_social": rason_social, "cupo":cupo, "nombre_comercial": nombre_comercial, "ruc_ced": ruc_ced}
+
+    headers = {'apikey': API_KEY}
+    responseHabitacionesS = requests.post('https://utplwso2.tk/api-Cliente/1.0/clientes', json=person_data, headers=headers)
+
+    return redirect(url_for('clientes'))
+
+#Huespedes
 @app.route('/huespedes')
 def huespedes():
     responseHabitaciones = requests.get('https://utpl-interoperabilidad-ejercicio1.onrender.com/v1_0/huesped')
