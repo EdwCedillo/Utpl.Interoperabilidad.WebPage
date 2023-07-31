@@ -53,8 +53,8 @@ def clientes():
     print(response)
     return render_template('clientes.html', personas=response.json())
 
-@app.route('/personas/delete/<idcliente>')
-def delete_personas(idcliente):
+@app.route('/clientes/delete/<idcliente>')
+def delete_clientes(idcliente):
     headers = {'apikey': API_KEY}
     response = requests.delete('https://utplwso2.tk/api-Cliente/1.0/clientes/'+idcliente, headers=headers)
     print(response)
@@ -62,7 +62,7 @@ def delete_personas(idcliente):
 
 
 @app.route('/clientes', methods=['POST'])
-def add():
+def addCliente():
     print("llego por aqui a guardar")
     rason_social = request.form.get('rason_social')
     ruc_ced = request.form.get('ruc_ced')
