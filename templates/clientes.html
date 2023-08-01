@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-  <h4 class="my-6">Listado de clientes</h4>
+  <h4 class="my-4">Listado de clientes</h4>
   <table class="table">
     <thead>
       <tr>
@@ -11,9 +11,10 @@
         <th scope="col">Tipo_cliente</th>
       </tr>
     </thead>
-    <tbody>     
+    <tbody>
+      {% for cliente in clientes %}    
       <tr>
-          <td><a href="/clientes/delete/{{ clientes.id }}">{{ cliente.ruc_ced }}</a></td>
+          <td><a href="/clientes/delete/{{ clientes.id }}">{{ cliente.id }}</a></td>
           <td>{{ cliente.rason_social }}</td>
           <td>{{ cliente.nombre_comercial}}</td>
           <td>{{ cliente.cupo }}</td>

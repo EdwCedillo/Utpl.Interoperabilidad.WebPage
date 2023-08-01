@@ -29,6 +29,7 @@ def delete_personas(idpersona):
     print(response)
     return redirect(url_for('personas'))
 
+
 @app.route('/personas', methods=['POST'])
 def add():
     print("llego por aqui a guardar")
@@ -49,33 +50,36 @@ def add():
 @app.route('/clientes')
 def clientes():
     headers = {'apikey': API_KEY}
+    #https://utplwso2.tk:443/api-Cliente/1.0/clientes
+    #https://utplwso2.tk/api-Cliente/1.0/clientes
     response = requests.get('https://utplwso2.tk/api-Cliente/1.0/clientes', headers=headers)
     print(response)
-    return render_template('clientes.html', personas=response.json())
+    return render_template('clientes.html', clientes1=response.json())
 
 @app.route('/clientes/delete/<idcliente>')
 def delete_clientes(idcliente):
     headers = {'apikey': API_KEY}
-    response = requests.delete('https://utplwso2.tk/api-Cliente/1.0/clientes/'+idcliente, headers=headers)
+    response = requests.delete('https://utplwso2.tk/api-Cliente/1.0/clientes'+idcliente, headers=headers)
     print(response)
     return redirect(url_for('clientes'))
 
 
 @app.route('/clientes', methods=['POST'])
 def addCliente():
-    print("llego por aqui a guardar")
+    print("llego por aqui a guardar clientes")
     rason_social = request.form.get('rason_social')
     ruc_ced = request.form.get('ruc_ced')
     cupo = int(request.form.get('cupo'))
     nombre_comercial = request.form.get('nombre_comercial')
 
 
-    person_data = {"rason_social": rason_social, "cupo":cupo, "nombre_comercial": nombre_comercial, "ruc_ced": ruc_ced}
+    cliente_data = {"rason_social": rason_social, "cupo":cupo, "nombre_comercial": nombre_comercial, "ruc_ced": ruc_ced}
 
     headers = {'apikey': API_KEY}
-    responseHabitacionesS = requests.post('https://utplwso2.tk/api-Cliente/1.0/clientes', json=person_data, headers=headers)
+    responseHabitacionesS = requests.post('https://utplwso2.tk/api-Cliente/1.0/clientes', json=cliente_data, headers=headers)
 
     return redirect(url_for('clientes'))
+
 
 #Huespedes
 @app.route('/huespedes')
